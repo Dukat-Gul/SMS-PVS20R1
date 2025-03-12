@@ -1,0 +1,2930 @@
+[
+    {
+        "id": "d3300f4f00e365d3",
+        "type": "tab",
+        "label": "Example 3Inverter Sunpower SMS-PVS20R1 to PVOutput.org",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2fa1e2df293ca094",
+        "type": "inject",
+        "z": "d3300f4f00e365d3",
+        "name": "make request",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "*/5 6-17 * * *",
+        "once": true,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 960,
+        "wires": [
+            [
+                "2d4d13cee097fd67",
+                "c2ca49258b751b9d",
+                "8362494709be5086"
+            ]
+        ]
+    },
+    {
+        "id": "2d4d13cee097fd67",
+        "type": "http request",
+        "z": "d3300f4f00e365d3",
+        "name": "Get Solar Info SERIALNUMBER2",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://172.27.153.1/cgi-bin/dl_cgi?Command=DeviceDetails&SerialNumber=SERIALNUMBER2",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 424.5,
+        "y": 960,
+        "wires": [
+            [
+                "809316e68b2d286f"
+            ]
+        ]
+    },
+    {
+        "id": "809316e68b2d286f",
+        "type": "html",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "property": "",
+        "outproperty": "",
+        "tag": ".info",
+        "ret": "html",
+        "as": "single",
+        "chr": "",
+        "x": 619,
+        "y": 960,
+        "wires": [
+            [
+                "4e5b0fa55eacfc72",
+                "ae38fa2f38eeb995",
+                "0f7031c859b482e9",
+                "e6dd06ee3e3e2ffe",
+                "c00e53e1e6e71dbb",
+                "3788add5f6d0d3d7",
+                "83e8bf45db466188",
+                "32b8d715fed326e2",
+                "e51d8049c373f8da",
+                "1aa8a60d47896e2b",
+                "bdc57f25ec094087",
+                "0fbd21183c31f7e7"
+            ]
+        ]
+    },
+    {
+        "id": "4e5b0fa55eacfc72",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Total Lifetime Energy",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[1]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.totallifetimeenergy",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "payload.totallifetimeenergy",
+                "pt": "msg",
+                "from": "&#xA0",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 784.5,
+        "y": 1060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ae38fa2f38eeb995",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Last Refresh",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[2]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.lastrefresh",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 754.5,
+        "y": 1100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e6dd06ee3e3e2ffe",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Model",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[4]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.model",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 734.5,
+        "y": 1180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0f7031c859b482e9",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Power",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[3]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgacpower",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacpower",
+                "pt": "msg",
+                "from": "&#xA0",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacpower",
+                "pt": "msg",
+                "from": "kW",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacpower",
+                "pt": "msg",
+                "from": ";",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacpower",
+                "pt": "msg",
+                "from": "<b>Avg AC Power:</b>",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 764.5,
+        "y": 1140,
+        "wires": [
+            [
+                "e0c3fd861dc825d4",
+                "93cad35dadd9991d"
+            ]
+        ]
+    },
+    {
+        "id": "c00e53e1e6e71dbb",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Voltage",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[5]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgacvoltage",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacvoltage",
+                "pt": "msg",
+                "from": "&#xA0",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacvoltage",
+                "pt": "msg",
+                "from": ";",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacvoltage",
+                "pt": "msg",
+                "from": "<b>Avg AC Voltage:</b>",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacvoltage",
+                "pt": "msg",
+                "from": "V",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 764.5,
+        "y": 1220,
+        "wires": [
+            [
+                "e0c3fd861dc825d4",
+                "17283227e01a12d7"
+            ]
+        ]
+    },
+    {
+        "id": "3788add5f6d0d3d7",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Serial Number",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[6]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.serialnumber",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 764.5,
+        "y": 1260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "83e8bf45db466188",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Current",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[7]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgaccurrent",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 764.5,
+        "y": 1300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "32b8d715fed326e2",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Software Version",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[8]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.softwareversion",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 774.5,
+        "y": 1340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e51d8049c373f8da",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg DC Voltage",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[9]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgdcvoltage",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 764.5,
+        "y": 1380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1aa8a60d47896e2b",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg DC Current",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[10]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgdccurrent",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 764.5,
+        "y": 1420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bdc57f25ec094087",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg Heat Sink Temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[11]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgheatsinktemp",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "from": "&#xA0",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "from": ";",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "from": "<b>Avg Heat Sink Temperature:</b>",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "from": "&#xB0",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "from": "C",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 804.5,
+        "y": 1460,
+        "wires": [
+            [
+                "e0c3fd861dc825d4",
+                "067c4eb9a4077baf"
+            ]
+        ]
+    },
+    {
+        "id": "0fbd21183c31f7e7",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Frequency",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[12]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgacfreq",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 774.5,
+        "y": 1500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ddd4f442f0becc78",
+        "type": "http request",
+        "z": "d3300f4f00e365d3",
+        "name": "Post",
+        "method": "POST",
+        "ret": "txt",
+        "url": "",
+        "x": 1554.5,
+        "y": 1200,
+        "wires": [
+            [
+                "0ba14dca77b591ad"
+            ]
+        ]
+    },
+    {
+        "id": "91900cf758aedb10",
+        "type": "function",
+        "z": "d3300f4f00e365d3",
+        "name": "Set API key here (SERIALNUMBER2)",
+        "func": "msg.action = msg.payload;\nmsg.headers = { \n    'X-Pvoutput-Apikey': 'API_KEY',\n    'X-Pvoutput-SystemId': 'PVOUTPUT_SYSTEMID',\n 'Content-Type': 'application/x-www-form-urlencoded'\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1161.25,
+        "y": 1243,
+        "wires": [
+            [
+                "c5b87f298b687edb"
+            ]
+        ]
+    },
+    {
+        "id": "0ba14dca77b591ad",
+        "type": "debug",
+        "z": "d3300f4f00e365d3",
+        "name": "headercheck",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "complete": "true",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1745.25,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "c9f062bfa9305644",
+        "type": "comment",
+        "z": "d3300f4f00e365d3",
+        "name": "Send data to PVOutput.org",
+        "info": "This flow allows you to send data to PVOutput.org\n\nYou'll need to sign up an account (it's free) and get\nAPI key.\n\nYou need to put this API key and the System ID\ninto both the \"Set API Key here\" boxes.\n\nMake sure you have set the correct Time Zone in the console - \n  sudo dpkg-reconfigure tzdata\n  \nAnd also in the EmonCMS webpage account settings.\n\nOtherwise you'll get offset graphs and data.",
+        "x": 1114.5,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "2fd71c272a59e510",
+        "type": "debug",
+        "z": "d3300f4f00e365d3",
+        "name": "Debug1",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "complete": "payload",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1556.25,
+        "y": 1247.5,
+        "wires": []
+    },
+    {
+        "id": "c5b87f298b687edb",
+        "type": "function",
+        "z": "d3300f4f00e365d3",
+        "name": "Set up data",
+        "func": "msg.action = msg.payload;\n\nmsg.url = \"http://pvoutput.org/service/r2/addstatus.jsp\";\n\n// set up the data/time\nvar now     = new Date(); \nvar year    = now.getFullYear(); \nvar month   = now.getMonth()+1; // Months start at 0 not 1 - FTFY\nvar day     = now.getDate();\nvar hour    = now.getHours(); \n\n//var hour    = now.getHours()+1; // GMT to BST\n//if (hour === 24) { // BST overflow - This clearly needs some work!\n//    hour = 0;\n//    day = day +1;\n//}     \n\nvar minute  = now.getMinutes();\nvar second  = now.getSeconds(); \n\n// fix any short date/times so all values are two digits\nif(month.toString().length == 1)  { var month = '0'+month; }\nif(day.toString().length == 1)    { var day = '0'+day;}\nif(hour.toString().length == 1)   { var hour = '0'+hour; }\nif(minute.toString().length == 1) { var minute = '0'+minute; }\nif(second.toString().length == 1) { var second = '0'+second; }\n\nuploaddate = year.toString()+month.toString()+day.toString(); // string the dates or we get errors!\n\nvar power = msg.payload.avgacpower*1000; // Power2 - Solar power\nvar temp = msg.payload.avgheatsinktemp // Temp\nvar acvolt = msg.payload.avgacvoltage  // Grid voltage\n\n//msg.payload = {\"d\":year+month+day,\"t\":hour+':'+minute,\"v1\":gentot,\"v2\":power2,\"v3\":contot,\"v4\":power1max,\"v6\":vrms,\"v8\":\"28.1\"};\nmsg.payload = {\"d\":uploaddate,\"t\":hour+':'+minute,\"v2\":power,\"v5\":temp,\"v6\":acvolt};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 7,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1381.25,
+        "y": 1243,
+        "wires": [
+            [
+                "2fd71c272a59e510",
+                "ddd4f442f0becc78",
+                "4bb866dff88f50d3"
+            ]
+        ]
+    },
+    {
+        "id": "4bb866dff88f50d3",
+        "type": "file",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "filename": "SolarData436",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1580,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c2ca49258b751b9d",
+        "type": "http request",
+        "z": "d3300f4f00e365d3",
+        "name": "Get Solar Info SERIALNUMBER1",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://172.27.153.1/cgi-bin/dl_cgi?Command=DeviceDetails&SerialNumber=SERIALNUMBER1",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 424.5,
+        "y": 200,
+        "wires": [
+            [
+                "48cb181be18be812"
+            ]
+        ]
+    },
+    {
+        "id": "e0c3fd861dc825d4",
+        "type": "join",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "mode": "custom",
+        "build": "merged",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": true,
+        "accumulate": false,
+        "timeout": "",
+        "count": "3",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 954.5,
+        "y": 1300,
+        "wires": [
+            [
+                "91900cf758aedb10"
+            ]
+        ]
+    },
+    {
+        "id": "8362494709be5086",
+        "type": "http request",
+        "z": "d3300f4f00e365d3",
+        "name": "Get Solar Info SERIALNUMBER3",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://172.27.153.1/cgi-bin/dl_cgi?Command=DeviceDetails&SerialNumber=SERIALNUMBER3",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 424.5,
+        "y": 1760,
+        "wires": [
+            [
+                "b6e272a2e3011659"
+            ]
+        ]
+    },
+    {
+        "id": "48cb181be18be812",
+        "type": "html",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "property": "",
+        "outproperty": "",
+        "tag": ".info",
+        "ret": "html",
+        "as": "single",
+        "chr": "",
+        "x": 654.5,
+        "y": 200,
+        "wires": [
+            [
+                "9878414d7276ccba",
+                "0e679d672101d5a5",
+                "700c21ba69b2fc7b",
+                "f85c9bd950764841",
+                "3597fdfcc4929b46",
+                "586bf014fd7c6627",
+                "dc4d5e70afa2cc70",
+                "fc91feb07563b62f",
+                "1a654bee5120a484",
+                "46310c939dd850f4",
+                "3fe8086914c80be9",
+                "9b84b22d1ef26f68"
+            ]
+        ]
+    },
+    {
+        "id": "9878414d7276ccba",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Total Lifetime Energy",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[1]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.totallifetimeenergy",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "payload.totallifetimeenergy",
+                "pt": "msg",
+                "from": "&#xA0",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0e679d672101d5a5",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Last Refresh",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[2]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.lastrefresh",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f85c9bd950764841",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Model",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[4]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.model",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "700c21ba69b2fc7b",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Power",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[3]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgacpower",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacpower",
+                "pt": "msg",
+                "from": "&#xA0",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacpower",
+                "pt": "msg",
+                "from": "kW",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacpower",
+                "pt": "msg",
+                "from": ";",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacpower",
+                "pt": "msg",
+                "from": "<b>Avg AC Power:</b>",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 380,
+        "wires": [
+            [
+                "66e81ce8e79c6d79",
+                "af863bd5dbb33df3"
+            ]
+        ]
+    },
+    {
+        "id": "3597fdfcc4929b46",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Voltage",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[5]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgacvoltage",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacvoltage",
+                "pt": "msg",
+                "from": "&#xA0",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacvoltage",
+                "pt": "msg",
+                "from": ";",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacvoltage",
+                "pt": "msg",
+                "from": "<b>Avg AC Voltage:</b>",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacvoltage",
+                "pt": "msg",
+                "from": "V",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 460,
+        "wires": [
+            [
+                "66e81ce8e79c6d79",
+                "489647028ec3747a"
+            ]
+        ]
+    },
+    {
+        "id": "586bf014fd7c6627",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Serial Number",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[6]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.serialnumber",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dc4d5e70afa2cc70",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Current",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[7]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgaccurrent",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fc91feb07563b62f",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Software Version",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[8]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.softwareversion",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 810,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1a654bee5120a484",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg DC Voltage",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[9]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgdcvoltage",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "46310c939dd850f4",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg DC Current",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[10]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgdccurrent",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3fe8086914c80be9",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg Heat Sink Temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[11]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgheatsinktemp",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "from": "&#xA0",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "from": ";",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "from": "<b>Avg Heat Sink Temperature:</b>",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "from": "&#xB0",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "from": "C",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 700,
+        "wires": [
+            [
+                "66e81ce8e79c6d79",
+                "0aeb8506924e5534"
+            ]
+        ]
+    },
+    {
+        "id": "9b84b22d1ef26f68",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Frequency",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[12]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgacfreq",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 810,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9f46c7578e3894eb",
+        "type": "http request",
+        "z": "d3300f4f00e365d3",
+        "name": "Post",
+        "method": "POST",
+        "ret": "txt",
+        "url": "",
+        "x": 1590,
+        "y": 440,
+        "wires": [
+            [
+                "af2c98e87414131a"
+            ]
+        ]
+    },
+    {
+        "id": "3509a0edb76e8f27",
+        "type": "function",
+        "z": "d3300f4f00e365d3",
+        "name": "Set API key here (SERIALNUMBER1)",
+        "func": "msg.action = msg.payload;\nmsg.headers = { \n    'X-Pvoutput-Apikey': 'API_KEY',\n    'X-Pvoutput-SystemId': 'PVOUTPUT_SYSTEMID',\n 'Content-Type': 'application/x-www-form-urlencoded'\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1196.75,
+        "y": 483,
+        "wires": [
+            [
+                "5a841b1df09ebf23"
+            ]
+        ]
+    },
+    {
+        "id": "af2c98e87414131a",
+        "type": "debug",
+        "z": "d3300f4f00e365d3",
+        "name": "headercheck",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "complete": "true",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1780.75,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "0b5bef723906ade4",
+        "type": "comment",
+        "z": "d3300f4f00e365d3",
+        "name": "Send data to PVOutput.org",
+        "info": "This flow allows you to send data to PVOutput.org\n\nYou'll need to sign up an account (it's free) and get\nAPI key.\n\nYou need to put this API key and the System ID\ninto both the \"Set API Key here\" boxes.\n\nMake sure you have set the correct Time Zone in the console - \n  sudo dpkg-reconfigure tzdata\n  \nAnd also in the EmonCMS webpage account settings.\n\nOtherwise you'll get offset graphs and data.",
+        "x": 1150,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "71f9f0f0bd45efa6",
+        "type": "debug",
+        "z": "d3300f4f00e365d3",
+        "name": "Debug1",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "complete": "payload",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1591.75,
+        "y": 487.5,
+        "wires": []
+    },
+    {
+        "id": "5a841b1df09ebf23",
+        "type": "function",
+        "z": "d3300f4f00e365d3",
+        "name": "Set up data",
+        "func": "msg.action = msg.payload;\n\nmsg.url = \"http://pvoutput.org/service/r2/addstatus.jsp\";\n\n// set up the data/time\nvar now     = new Date(); \nvar year    = now.getFullYear(); \nvar month   = now.getMonth()+1; // Months start at 0 not 1 - FTFY\nvar day     = now.getDate();\nvar hour    = now.getHours(); \n\n//var hour    = now.getHours()+1; // GMT to BST\n//if (hour === 24) { // BST overflow - This clearly needs some work!\n//    hour = 0;\n//    day = day +1;\n//}     \n\nvar minute  = now.getMinutes();\nvar second  = now.getSeconds(); \n\n// fix any short date/times so all values are two digits\nif(month.toString().length == 1)  { var month = '0'+month; }\nif(day.toString().length == 1)    { var day = '0'+day;}\nif(hour.toString().length == 1)   { var hour = '0'+hour; }\nif(minute.toString().length == 1) { var minute = '0'+minute; }\nif(second.toString().length == 1) { var second = '0'+second; }\n\nuploaddate = year.toString()+month.toString()+day.toString(); // string the dates or we get errors!\n\nvar power = msg.payload.avgacpower*1000; // Power2 - Solar power\nvar temp = msg.payload.avgheatsinktemp // Temp\nvar acvolt = msg.payload.avgacvoltage  // Grid voltage\n\n//msg.payload = {\"d\":year+month+day,\"t\":hour+':'+minute,\"v1\":gentot,\"v2\":power2,\"v3\":contot,\"v4\":power1max,\"v6\":vrms,\"v8\":\"28.1\"};\nmsg.payload = {\"d\":uploaddate,\"t\":hour+':'+minute,\"v2\":power,\"v5\":temp,\"v6\":acvolt};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 7,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1416.75,
+        "y": 483,
+        "wires": [
+            [
+                "71f9f0f0bd45efa6",
+                "9f46c7578e3894eb",
+                "a3099eaaa253743b"
+            ]
+        ]
+    },
+    {
+        "id": "a3099eaaa253743b",
+        "type": "file",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "filename": "SolarData677",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1620,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "66e81ce8e79c6d79",
+        "type": "join",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "mode": "custom",
+        "build": "merged",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": true,
+        "accumulate": false,
+        "timeout": "",
+        "count": "3",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 990,
+        "y": 540,
+        "wires": [
+            [
+                "3509a0edb76e8f27"
+            ]
+        ]
+    },
+    {
+        "id": "b6e272a2e3011659",
+        "type": "html",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "property": "",
+        "outproperty": "",
+        "tag": ".info",
+        "ret": "html",
+        "as": "single",
+        "chr": "",
+        "x": 634.5,
+        "y": 1760,
+        "wires": [
+            [
+                "033548189a2c13f4",
+                "b8b431cfb7efe550",
+                "25aa7b1544293819",
+                "3b2f71f61e10a4a5",
+                "81d634f98d56b168",
+                "30fc925fc50cb9b5",
+                "b9d661a24019fa11",
+                "5672db2510c30280",
+                "9975eec244b7eec7",
+                "219458bc6ef632af",
+                "18c35b3b9185adab",
+                "a8f994fdb1b9e3c6"
+            ]
+        ]
+    },
+    {
+        "id": "033548189a2c13f4",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Total Lifetime Energy",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[1]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.totallifetimeenergy",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "payload.totallifetimeenergy",
+                "pt": "msg",
+                "from": "&#xA0",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 1860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b8b431cfb7efe550",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Last Refresh",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[2]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.lastrefresh",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 1900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3b2f71f61e10a4a5",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Model",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[4]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.model",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 1980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "25aa7b1544293819",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Power",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[3]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgacpower",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacpower",
+                "pt": "msg",
+                "from": "&#xA0",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacpower",
+                "pt": "msg",
+                "from": "kW",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacpower",
+                "pt": "msg",
+                "from": ";",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacpower",
+                "pt": "msg",
+                "from": "<b>Avg AC Power:</b>",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 1940,
+        "wires": [
+            [
+                "c787f0e105e65d91",
+                "c72fb49f1dbbdf9c"
+            ]
+        ]
+    },
+    {
+        "id": "81d634f98d56b168",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Voltage",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[5]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgacvoltage",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacvoltage",
+                "pt": "msg",
+                "from": "&#xA0",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacvoltage",
+                "pt": "msg",
+                "from": ";",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacvoltage",
+                "pt": "msg",
+                "from": "<b>Avg AC Voltage:</b>",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgacvoltage",
+                "pt": "msg",
+                "from": "V",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 2020,
+        "wires": [
+            [
+                "c787f0e105e65d91",
+                "d3d628c0307b1a0e"
+            ]
+        ]
+    },
+    {
+        "id": "30fc925fc50cb9b5",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Serial Number",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[6]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.serialnumber",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 2060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b9d661a24019fa11",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Current",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[7]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgaccurrent",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 2100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5672db2510c30280",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Software Version",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[8]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.softwareversion",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 2140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9975eec244b7eec7",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg DC Voltage",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[9]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgdcvoltage",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 2180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "219458bc6ef632af",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg DC Current",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[10]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgdccurrent",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 2220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "18c35b3b9185adab",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg Heat Sink Temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[11]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgheatsinktemp",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "from": "&#xA0",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "from": ";",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "from": "<b>Avg Heat Sink Temperature:</b>",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "from": "&#xB0",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "from": "C",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 2260,
+        "wires": [
+            [
+                "c787f0e105e65d91",
+                "309493b8c3a41168"
+            ]
+        ]
+    },
+    {
+        "id": "a8f994fdb1b9e3c6",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Frequency",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[12]",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgacfreq",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 2300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3b57fe53cdc21d1d",
+        "type": "http request",
+        "z": "d3300f4f00e365d3",
+        "name": "Post",
+        "method": "POST",
+        "ret": "txt",
+        "url": "",
+        "x": 1570,
+        "y": 2000,
+        "wires": [
+            [
+                "ce88ac49c74f5753"
+            ]
+        ]
+    },
+    {
+        "id": "97bc76d10bb796e7",
+        "type": "function",
+        "z": "d3300f4f00e365d3",
+        "name": "Set API key here (SERIALNUMBER3)",
+        "func": "msg.action = msg.payload;\nmsg.headers = { \n    'X-Pvoutput-Apikey': 'API_KEY',\n    'X-Pvoutput-SystemId': 'PVOUTPUT_SYSTEMID',\n 'Content-Type': 'application/x-www-form-urlencoded'\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1176.75,
+        "y": 2043,
+        "wires": [
+            [
+                "076ead7b6f243b2d"
+            ]
+        ]
+    },
+    {
+        "id": "ce88ac49c74f5753",
+        "type": "debug",
+        "z": "d3300f4f00e365d3",
+        "name": "headercheck",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "complete": "true",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1760.75,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "8d308a3240796892",
+        "type": "comment",
+        "z": "d3300f4f00e365d3",
+        "name": "Send data to PVOutput.org",
+        "info": "This flow allows you to send data to PVOutput.org\n\nYou'll need to sign up an account (it's free) and get\nAPI key.\n\nYou need to put this API key and the System ID\ninto both the \"Set API Key here\" boxes.\n\nMake sure you have set the correct Time Zone in the console - \n  sudo dpkg-reconfigure tzdata\n  \nAnd also in the EmonCMS webpage account settings.\n\nOtherwise you'll get offset graphs and data.",
+        "x": 1130,
+        "y": 1980,
+        "wires": []
+    },
+    {
+        "id": "418c01ad1847e191",
+        "type": "debug",
+        "z": "d3300f4f00e365d3",
+        "name": "Debug1",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "complete": "payload",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1571.75,
+        "y": 2047.5,
+        "wires": []
+    },
+    {
+        "id": "076ead7b6f243b2d",
+        "type": "function",
+        "z": "d3300f4f00e365d3",
+        "name": "Set up data",
+        "func": "msg.action = msg.payload;\n\nmsg.url = \"http://pvoutput.org/service/r2/addstatus.jsp\";\n\n// set up the data/time\nvar now     = new Date(); \nvar year    = now.getFullYear(); \nvar month   = now.getMonth()+1; // Months start at 0 not 1 - FTFY\nvar day     = now.getDate();\nvar hour    = now.getHours(); \n\n//var hour    = now.getHours()+1; // GMT to BST\n//if (hour === 24) { // BST overflow - This clearly needs some work!\n//    hour = 0;\n//    day = day +1;\n//}     \n\nvar minute  = now.getMinutes();\nvar second  = now.getSeconds(); \n\n// fix any short date/times so all values are two digits\nif(month.toString().length == 1)  { var month = '0'+month; }\nif(day.toString().length == 1)    { var day = '0'+day;}\nif(hour.toString().length == 1)   { var hour = '0'+hour; }\nif(minute.toString().length == 1) { var minute = '0'+minute; }\nif(second.toString().length == 1) { var second = '0'+second; }\n\nuploaddate = year.toString()+month.toString()+day.toString(); // string the dates or we get errors!\n\nvar power = msg.payload.avgacpower*1000; // Power2 - Solar power\nvar temp = msg.payload.avgheatsinktemp // Temp\nvar acvolt = msg.payload.avgacvoltage  // Grid voltage\n\n//msg.payload = {\"d\":year+month+day,\"t\":hour+':'+minute,\"v1\":gentot,\"v2\":power2,\"v3\":contot,\"v4\":power1max,\"v6\":vrms,\"v8\":\"28.1\"};\nmsg.payload = {\"d\":uploaddate,\"t\":hour+':'+minute,\"v2\":power,\"v5\":temp,\"v6\":acvolt};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 7,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1396.75,
+        "y": 2043,
+        "wires": [
+            [
+                "418c01ad1847e191",
+                "3b57fe53cdc21d1d",
+                "2901f77bbe11c669"
+            ]
+        ]
+    },
+    {
+        "id": "2901f77bbe11c669",
+        "type": "file",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "filename": "SolarData460",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1600,
+        "y": 1940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c787f0e105e65d91",
+        "type": "join",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "mode": "custom",
+        "build": "merged",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": true,
+        "accumulate": false,
+        "timeout": "",
+        "count": "3",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 970,
+        "y": 2100,
+        "wires": [
+            [
+                "97bc76d10bb796e7"
+            ]
+        ]
+    },
+    {
+        "id": "90625c7d2b636235",
+        "type": "function",
+        "z": "d3300f4f00e365d3",
+        "name": "Set API key here (Combined)",
+        "func": "msg.action = msg.payload;\nmsg.headers = { \n    'X-Pvoutput-Apikey': 'API_KEY',\n    'X-Pvoutput-SystemId': 'PVOUTPUT_SYSTEMID',\n 'Content-Type': 'application/x-www-form-urlencoded'\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 2480,
+        "wires": [
+            [
+                "b74c97ac2f033997"
+            ]
+        ]
+    },
+    {
+        "id": "f1568dd2c04a3f92",
+        "type": "comment",
+        "z": "d3300f4f00e365d3",
+        "name": "Send data to PVOutput.org",
+        "info": "This flow allows you to send data to PVOutput.org\n\nYou'll need to sign up an account (it's free) and get\nAPI key.\n\nYou need to put this API key and the System ID\ninto both the \"Set API Key here\" boxes.\n\nMake sure you have set the correct Time Zone in the console - \n  sudo dpkg-reconfigure tzdata\n  \nAnd also in the EmonCMS webpage account settings.\n\nOtherwise you'll get offset graphs and data.",
+        "x": 1063.25,
+        "y": 2417,
+        "wires": []
+    },
+    {
+        "id": "af863bd5dbb33df3",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Power",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.avgacpower",
+                "pt": "msg",
+                "to": "payload.avgacpower1",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 773.25,
+        "y": 2497,
+        "wires": [
+            [
+                "593e865fb6b58226"
+            ]
+        ]
+    },
+    {
+        "id": "489647028ec3747a",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Voltage",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.avgacvoltage",
+                "pt": "msg",
+                "to": "payload.avgacvoltage1",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 773.25,
+        "y": 2537,
+        "wires": [
+            [
+                "b71194a4a0ccd5b0"
+            ]
+        ]
+    },
+    {
+        "id": "0aeb8506924e5534",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg Heat Sink Temperature",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "to": "payload.avgheatsinktemp1",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 813.25,
+        "y": 2577,
+        "wires": [
+            [
+                "1e9e27c88842c02e"
+            ]
+        ]
+    },
+    {
+        "id": "93cad35dadd9991d",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Power",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.avgacpower",
+                "pt": "msg",
+                "to": "payload.avgacpower2",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 773.25,
+        "y": 2617,
+        "wires": [
+            [
+                "593e865fb6b58226"
+            ]
+        ]
+    },
+    {
+        "id": "17283227e01a12d7",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Voltage",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.avgacvoltage",
+                "pt": "msg",
+                "to": "payload.avgacvoltage2",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 773.25,
+        "y": 2657,
+        "wires": [
+            [
+                "b71194a4a0ccd5b0"
+            ]
+        ]
+    },
+    {
+        "id": "067c4eb9a4077baf",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg Heat Sink Temperature",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "to": "payload.avgheatsinktemp2",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 813.25,
+        "y": 2697,
+        "wires": [
+            [
+                "1e9e27c88842c02e"
+            ]
+        ]
+    },
+    {
+        "id": "c72fb49f1dbbdf9c",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Power",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.avgacpower",
+                "pt": "msg",
+                "to": "payload.avgacpower3",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 773.25,
+        "y": 2737,
+        "wires": [
+            [
+                "593e865fb6b58226"
+            ]
+        ]
+    },
+    {
+        "id": "d3d628c0307b1a0e",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg AC Voltage",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.avgacvoltage",
+                "pt": "msg",
+                "to": "payload.avgacvoltage3",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 773.25,
+        "y": 2777,
+        "wires": [
+            [
+                "b71194a4a0ccd5b0"
+            ]
+        ]
+    },
+    {
+        "id": "309493b8c3a41168",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "Avg Heat Sink Temperature",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.avgheatsinktemp",
+                "pt": "msg",
+                "to": "payload.avgheatsinktemp3",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 813.25,
+        "y": 2817,
+        "wires": [
+            [
+                "1e9e27c88842c02e"
+            ]
+        ]
+    },
+    {
+        "id": "b55114fb996a38e3",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "avgacpower1",
+                "pt": "flow",
+                "to": "payload.avgacpower1",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "avgacpower2",
+                "pt": "flow",
+                "to": "payload.avgacpower2",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "avgacpower3",
+                "pt": "flow",
+                "to": "payload.avgacpower3",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1273.25,
+        "y": 2697,
+        "wires": [
+            [
+                "f8fd0720f9f994e7"
+            ]
+        ]
+    },
+    {
+        "id": "f8fd0720f9f994e7",
+        "type": "function",
+        "z": "d3300f4f00e365d3",
+        "name": "add",
+        "func": "var val1 = parseFloat(flow.get(\"avgacpower1\") || \"0\");\nvar val2 = parseFloat(flow.get(\"avgacpower2\") || \"0\");\nvar val3 = parseFloat(flow.get(\"avgacpower3\") || \"0\");\nmsg.payload = parseFloat(flow.get(\"avgacpower\") || \"0\") + val1 + val2 + val3;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1463.25,
+        "y": 2697,
+        "wires": [
+            [
+                "2102288b9d583ee6"
+            ]
+        ]
+    },
+    {
+        "id": "593e865fb6b58226",
+        "type": "join",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "mode": "custom",
+        "build": "merged",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": true,
+        "accumulate": false,
+        "timeout": "",
+        "count": "3",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 1103.25,
+        "y": 2697,
+        "wires": [
+            [
+                "b55114fb996a38e3"
+            ]
+        ]
+    },
+    {
+        "id": "cc0a07e5dcc4877a",
+        "type": "http request",
+        "z": "d3300f4f00e365d3",
+        "name": "Post",
+        "method": "POST",
+        "ret": "txt",
+        "url": "",
+        "x": 1483.25,
+        "y": 2437,
+        "wires": [
+            [
+                "0f49d017a234ef62"
+            ]
+        ]
+    },
+    {
+        "id": "0f49d017a234ef62",
+        "type": "debug",
+        "z": "d3300f4f00e365d3",
+        "name": "headercheck",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "complete": "true",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1674,
+        "y": 2437,
+        "wires": []
+    },
+    {
+        "id": "0c2d82cc860e015c",
+        "type": "debug",
+        "z": "d3300f4f00e365d3",
+        "name": "Debug1",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "complete": "payload",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1485,
+        "y": 2484.5,
+        "wires": []
+    },
+    {
+        "id": "b74c97ac2f033997",
+        "type": "function",
+        "z": "d3300f4f00e365d3",
+        "name": "Set up data",
+        "func": "msg.action = msg.payload;\n\nmsg.url = \"http://pvoutput.org/service/r2/addstatus.jsp\";\n\n// set up the data/time\nvar now     = new Date(); \nvar year    = now.getFullYear(); \nvar month   = now.getMonth()+1; // Months start at 0 not 1 - FTFY\nvar day     = now.getDate();\nvar hour    = now.getHours(); \n\n//var hour    = now.getHours()+1; // GMT to BST\n//if (hour === 24) { // BST overflow - This clearly needs some work!\n//    hour = 0;\n//    day = day +1;\n//}     \n\nvar minute  = now.getMinutes();\nvar second  = now.getSeconds(); \n\n// fix any short date/times so all values are two digits\nif(month.toString().length == 1)  { var month = '0'+month; }\nif(day.toString().length == 1)    { var day = '0'+day;}\nif(hour.toString().length == 1)   { var hour = '0'+hour; }\nif(minute.toString().length == 1) { var minute = '0'+minute; }\nif(second.toString().length == 1) { var second = '0'+second; }\n\nuploaddate = year.toString()+month.toString()+day.toString(); // string the dates or we get errors!\n\nvar power = msg.payload.avgacpower*1000; // Power2 - Solar power\nvar temp = msg.payload.avgheatsinktemp // Temp\nvar acvolt = msg.payload.avgacvoltage  // Grid voltage\n\n//msg.payload = {\"d\":year+month+day,\"t\":hour+':'+minute,\"v1\":gentot,\"v2\":power2,\"v3\":contot,\"v4\":power1max,\"v6\":vrms,\"v8\":\"28.1\"};\nmsg.payload = {\"d\":uploaddate,\"t\":hour+':'+minute,\"v2\":power,\"v5\":temp,\"v6\":acvolt};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 7,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1310,
+        "y": 2480,
+        "wires": [
+            [
+                "0c2d82cc860e015c",
+                "cc0a07e5dcc4877a",
+                "5b63c016fcf9d05d"
+            ]
+        ]
+    },
+    {
+        "id": "2102288b9d583ee6",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgacpower",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1643.25,
+        "y": 2697,
+        "wires": [
+            [
+                "d8ad9254e89fe4f9"
+            ]
+        ]
+    },
+    {
+        "id": "4335cfbd84a6880b",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "avgacvoltage1",
+                "pt": "flow",
+                "to": "payload.avgacvoltage1",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "avgacvoltage2",
+                "pt": "flow",
+                "to": "payload.avgacvoltage2",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "avgacvoltage3",
+                "pt": "flow",
+                "to": "payload.avgacvoltage3",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1273.25,
+        "y": 2737,
+        "wires": [
+            [
+                "bf5be8de0901fda1"
+            ]
+        ]
+    },
+    {
+        "id": "bf5be8de0901fda1",
+        "type": "function",
+        "z": "d3300f4f00e365d3",
+        "name": "add",
+        "func": "var val1 = parseFloat(flow.get(\"avgacvoltage1\") || \"0\");\nvar val2 = parseFloat(flow.get(\"avgacvoltage2\") || \"0\");\nvar val3 = parseFloat(flow.get(\"avgacvoltage3\") || \"0\");\nmsg.payload = (parseFloat(flow.get(\"avgacvoltage\") || \"0\") + val1 + val2 + val3) /3;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1463.25,
+        "y": 2737,
+        "wires": [
+            [
+                "7f7cfd3d864a1b49"
+            ]
+        ]
+    },
+    {
+        "id": "b71194a4a0ccd5b0",
+        "type": "join",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "mode": "custom",
+        "build": "merged",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": true,
+        "accumulate": false,
+        "timeout": "",
+        "count": "3",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 1103.25,
+        "y": 2737,
+        "wires": [
+            [
+                "4335cfbd84a6880b"
+            ]
+        ]
+    },
+    {
+        "id": "7f7cfd3d864a1b49",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgacvoltage",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1643.25,
+        "y": 2737,
+        "wires": [
+            [
+                "d8ad9254e89fe4f9"
+            ]
+        ]
+    },
+    {
+        "id": "cb2b5c7166fbcb2b",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "avgheatsinktemp1",
+                "pt": "flow",
+                "to": "payload.avgheatsinktemp1",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "avgheatsinktemp2",
+                "pt": "flow",
+                "to": "payload.avgheatsinktemp2",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "avgheatsinktemp3",
+                "pt": "flow",
+                "to": "payload.avgheatsinktemp3",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1273.25,
+        "y": 2777,
+        "wires": [
+            [
+                "2a4470f468186f69"
+            ]
+        ]
+    },
+    {
+        "id": "2a4470f468186f69",
+        "type": "function",
+        "z": "d3300f4f00e365d3",
+        "name": "add",
+        "func": "var val1 = parseFloat(flow.get(\"avgheatsinktemp1\") || \"0\");\nvar val2 = parseFloat(flow.get(\"avgheatsinktemp2\") || \"0\");\nvar val3 = parseFloat(flow.get(\"avgheatsinktemp3\") || \"0\");\nmsg.payload = (parseFloat(flow.get(\"avgacpower\") || \"0\") + val1 + val2 + val3) / 3;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1463.25,
+        "y": 2777,
+        "wires": [
+            [
+                "c635f6bd554ec9de"
+            ]
+        ]
+    },
+    {
+        "id": "1e9e27c88842c02e",
+        "type": "join",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "mode": "custom",
+        "build": "merged",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": true,
+        "accumulate": false,
+        "timeout": "",
+        "count": "3",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 1103.25,
+        "y": 2777,
+        "wires": [
+            [
+                "cb2b5c7166fbcb2b"
+            ]
+        ]
+    },
+    {
+        "id": "c635f6bd554ec9de",
+        "type": "change",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.avgheatsinktemp",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1643.25,
+        "y": 2777,
+        "wires": [
+            [
+                "d8ad9254e89fe4f9"
+            ]
+        ]
+    },
+    {
+        "id": "d8ad9254e89fe4f9",
+        "type": "join",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "mode": "custom",
+        "build": "merged",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": true,
+        "accumulate": false,
+        "timeout": "",
+        "count": "3",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 1863.25,
+        "y": 2737,
+        "wires": [
+            [
+                "90625c7d2b636235"
+            ]
+        ]
+    },
+    {
+        "id": "5b63c016fcf9d05d",
+        "type": "file",
+        "z": "d3300f4f00e365d3",
+        "name": "",
+        "filename": "SolarDataCombined",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1493.25,
+        "y": 2377,
+        "wires": [
+            []
+        ]
+    }
+]
