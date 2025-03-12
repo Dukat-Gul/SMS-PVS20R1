@@ -13,6 +13,6 @@ Within this example substitute out SERIALNUMBER for each of the inverters which 
 Some References/Insight I used to get this done:
 https://blog.gruby.com/2020/04/28/monitoring-a-sunpower-solar-system.html
 
-Future - should the SMS-PVS20R1 unit fail. Have considered directly connecting the R485 plug into the Rpi4b and seeing if Yasdi2Mqtt project would help. As not sure if my setup is "older pre modbus (Yasdi) based RS485 PVS2 based monitor".
+Future - should the SMS-PVS20R1 unit fail. Have considered directly connecting the R485 plug into the Rpi4b and seeing if Yasdi2Mqtt project would help. As not sure if the setup is "older pre modbus (Yasdi) based RS485 PVS2 based monitor".
 https://github.com/pkwagner/yasdi2mqtt
 
